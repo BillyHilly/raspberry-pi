@@ -40,4 +40,20 @@ Disk /dev/sda: xxx GB, xxx bytes
     ```
      touch /diskname/test
     ```
-A file should be created. If you get an error, follow it's lead or simply start over.
+    A file should be created. If you get an error, follow it's lead or simply start over.
+    
+
+## Mounting
+`sudo mount /dev/sda1 /mnt`
+I got it to mount and allow access with this. Set up the directory to mount it to:
+```
+sudo mkdir /mnt/your-folder-name
+sudo chown -R pi:pi /mnt/your-folder-name
+sudo chmod -R 775 /mnt/your-folder-name
+sudo setfacl -Rdm g:pi:rwx /mnt/your-folder-name
+sudo setfacl -Rm g:pi:rwx /mnt/your-folder-name
+```
+Them mount it.
+```
+sudo mount -o uid=pi,gid=pi /dev/sda1 /mnt/your-folder-name
+```
